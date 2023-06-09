@@ -24,6 +24,7 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
         QuestionType.GuessPictureByAuthor to ::generateGuessPictureByAuthorQuestion,
         QuestionType.Random to ::generateRandomQuestion
     )
+
     init {
         coroutineScope.launch {
             replenishQueue()
@@ -153,7 +154,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
             .apply { add(correctYear); shuffle() }
 
         val correctAnswerIndex = answers.indexOf(correctYear)
-
 
         return QuestionData(
             type = QuestionType.GuessBirthYearOfAuthor,
