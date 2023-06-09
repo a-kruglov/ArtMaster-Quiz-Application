@@ -10,14 +10,13 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.lvappquiz.R
+import com.example.lvappquiz.dialogues.DialogCloseListener
+import com.example.lvappquiz.dialogues.TextDialogFragment
 import com.example.lvappquiz.lives.LivesFragment
 import com.example.lvappquiz.lives.LivesViewModel
 import com.example.lvappquiz.questions.QuestionGenerator
 import com.example.lvappquiz.questions.QuestionType
-import com.example.lvappquiz.questions.QuestionViewType
 import com.example.lvappquiz.questions.QuestionViewModel
-import com.example.lvappquiz.random_questions.DialogCloseListener
-import com.example.lvappquiz.random_questions.FactDialogFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,12 +87,12 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
 
     private fun openFactDialog() {
         val fact = questionViewModel.question.value?.fact
-        val factDialogFragment = FactDialogFragment()
+        val textDialogFragment = TextDialogFragment()
         val args = Bundle()
         args.putString("fact", fact)
-        factDialogFragment.arguments = args
-        factDialogFragment.dialogCloseListener = this
-        factDialogFragment.show(requireActivity().supportFragmentManager, "factDialog")
+        textDialogFragment.arguments = args
+        textDialogFragment.dialogCloseListener = this
+        textDialogFragment.show(requireActivity().supportFragmentManager, "factDialog")
     }
 
     override fun onDialogClose() {

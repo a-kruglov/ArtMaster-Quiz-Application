@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.lvappquiz.databinding.FragmentFactBinding
 
-class FactDialogFragment : DialogFragment() {
+interface DialogCloseListener {
+    fun onDialogClose()
+}
+
+class TextDialogFragment : DialogFragment() {
 
     // Поле для хранения связки с разметкой фрагмента
     private lateinit var binding: FragmentFactBinding
@@ -32,7 +36,7 @@ class FactDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Получение строки "fact" из аргументов фрагмента
-        val fact = arguments?.getString("fact")
+        val fact = arguments?.getString("text")
         Log.d("FactDialogFragment", "Текст факта: $fact")
 
         // Установка текста факта в TextView
@@ -58,11 +62,6 @@ class FactDialogFragment : DialogFragment() {
             // Установка ширины и высоты диалогового окна
             dialog.window?.setLayout(width, height)
         }
-    }
-
-    // Интерфейс для слушателя закрытия диалогового окна
-    interface DialogCloseListener {
-        fun onDialogClose()
     }
 }
 
