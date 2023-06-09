@@ -1,0 +1,38 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center"
+        android:background="@android:color/transparent">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
+
+        <TextView
+                android:id="@+id/fact_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                tools:text="Fact will be here."
+                android:textColor="@color/ppp" />
+
+    </ScrollView>
+
+    <Button
+            android:id="@+id/okay_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ok"
+            android:textAllCaps="false"
+            android:layout_marginTop="20dp" />
+
+</LinearLayout>
+

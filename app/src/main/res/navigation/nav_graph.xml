@@ -1,0 +1,105 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        app:startDestination="@+id/menuFragment">
+
+    <fragment
+            android:id="@+id/menuFragment"
+            android:name="com.example.lvappquiz.menu.MenuFragment"
+            android:label="MenuFragment"
+            tools:layout="@layout/fragment_menu">
+        <action
+                android:id="@+id/actionMenuFragmentToRandomQuestionsFragment"
+                app:destination="@id/randomQuestionsFragment" />
+        <action
+                android:id="@+id/action_menuFragment_to_quizMenuFragment"
+                app:destination="@id/quizMenuFragment" />
+        <action
+                android:id="@+id/action_menuFragment_to_questContainerFragment"
+                app:destination="@id/questContainerFragment" />
+        <action
+                android:id="@+id/action_menuFragment_to_aiGuess"
+                app:destination="@id/aiGuessFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/quizMenuFragment"
+            android:name="com.example.lvappquiz.quiz.QuizMenuFragment"
+            android:label="QuizMenuFragment"
+            tools:layout="@layout/fragment_quiz_menu">
+        <action
+                android:id="@+id/action_quizMenuFragment_to_containerFragment"
+                app:destination="@id/containerFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/aiGuessFragment"
+            android:name="com.example.lvappquiz.ai_generation.AIGuessFragment"
+            android:label="AiGuessFragment"
+            tools:layout="@layout/fragment_ai_guess">
+    </fragment>
+
+    <fragment
+            android:id="@+id/containerFragment"
+            android:name="com.example.lvappquiz.quiz.QuizQuestionContainerFragment"
+            android:label="ContainerFragment"
+            tools:layout="@layout/fragment_quiz_question_container">
+    </fragment>
+
+    <fragment
+            android:id="@+id/randomQuestionsFragment"
+            android:name="com.example.lvappquiz.questions.fragments.specific.RandomQuestionsFragment"
+            tools:layout="@layout/fragment_question"
+            >
+        <action
+                android:id="@+id/actionQuizFragmentToFactFragment"
+                app:destination="@id/factFragment" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/guessPictureByAuthorQuestionsFragment"
+            android:name="com.example.lvappquiz.questions.fragments.specific.GuessPictureByAuthorQuestionsFragment"
+            tools:layout="@layout/fragment_question">
+    </fragment>
+
+    <fragment
+            android:id="@+id/guessAuthorByPictureQuestionsFragment"
+            android:name="com.example.lvappquiz.questions.fragments.specific.GuessAuthorByPictureQuestionsFragment"
+            tools:layout="@layout/fragment_question">
+    </fragment>
+
+    <fragment
+            android:id="@+id/guessYearByPictureQuestionsFragment"
+            android:name="com.example.lvappquiz.questions.fragments.specific.GuessYearByPictureQuestionsFragment"
+            tools:layout="@layout/fragment_question">
+    </fragment>
+
+    <fragment
+            android:id="@+id/guessBirthYearOfAuthorQuestionFragment"
+            android:name="com.example.lvappquiz.questions.fragments.specific.GuessBirthYearOfAuthorQuestionFragment"
+            tools:layout="@layout/fragment_question">
+    </fragment>
+
+    <fragment
+            android:id="@+id/factFragment"
+            android:name="com.example.lvappquiz.random_questions.FactDialogFragment"
+            tools:layout="@layout/fragment_fact">
+        <argument
+                android:name="fact"
+                app:argType="string" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/questContainerFragment"
+            android:name="com.example.lvappquiz.quests.QuestContainerFragment"
+            android:label="QuestContainerFragment"
+            tools:layout="@layout/fragment_quest_container">
+        <action
+                android:id="@+id/action_questContainerFragment_to_factFragment"
+                app:destination="@id/factFragment" />
+    </fragment>
+
+</navigation>

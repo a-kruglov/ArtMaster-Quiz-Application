@@ -1,0 +1,106 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+    id 'kotlinx-serialization'
+}
+
+android {
+    namespace 'com.example.lvappquiz'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.lvappquiz"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'OPEN_AI_KEY', "\"${OPEN_AI_KEY}\""
+        buildConfigField 'String', 'HARVARD_API_KEY', "\"${HARVARD_API_KEY}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+//    implementation 'org.jetbrains.kotlin:kotlin-android-extensions:1.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+    implementation('androidx.databinding:databinding-runtime:8.0.2') {
+        exclude group: 'androidx.databinding', module: 'library'
+    }
+    implementation "androidx.room:room-runtime:2.5.1"
+    implementation 'androidx.databinding:databinding-adapters:8.0.2'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    kapt "androidx.room:room-compiler:2.5.1"
+    implementation "androidx.room:room-ktx:2.5.1"
+    implementation "androidx.room:room-rxjava2:2.5.1"
+    implementation "androidx.room:room-guava:2.5.1"
+    testImplementation "androidx.room:room-testing:2.5.1"
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
+    implementation 'com.dropbox.core:dropbox-core-sdk:4.0.0'
+
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1'
+
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.15.1'
+
+    implementation 'com.squareup.moshi:moshi:1.12.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.12.0'
+
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
+    implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
+
+    implementation platform('com.aallam.openai:openai-client-bom:3.2.5')
+}

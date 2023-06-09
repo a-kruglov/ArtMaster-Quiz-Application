@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/game_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Игры"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="50dp" />
+
+    <Button
+            android:id="@+id/button_quiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Тесты"
+            app:layout_constraintTop_toBottomOf="@+id/game_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="30dp" />
+
+    <Button
+            android:id="@+id/button_quests"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/quest"
+            app:layout_constraintTop_toBottomOf="@+id/button_quiz"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp" />
+
+    <Button
+            android:id="@+id/button_random"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Рандомные вопросы"
+            app:layout_constraintTop_toBottomOf="@+id/button_quests"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp" />
+
+    <Button
+            android:id="@+id/button_ai_guess"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="В разработке"
+            app:layout_constraintTop_toBottomOf="@+id/button_random"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

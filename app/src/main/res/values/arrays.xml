@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="lives_ids">
+        <item>@id/life1</item>
+        <item>@id/life2</item>
+        <item>@id/life3</item>
+    </array>
+
+    <array name="answers_ids">
+        <item>@id/answer1</item>
+        <item>@id/answer2</item>
+        <item>@id/answer3</item>
+        <item>@id/answer4</item>
+    </array>
+    <array name="answer_image_ids">
+        <item>@id/answer_image1</item>
+        <item>@id/answer_image2</item>
+        <item>@id/answer_image3</item>
+        <item>@id/answer_image4</item>
+    </array>
+    <array name="ai_images_ids">
+        <item>@id/ai_image1</item>
+        <item>@id/ai_image2</item>
+        <item>@id/ai_image3</item>
+        <item>@id/ai_image4</item>
+    </array>
+</resources>
