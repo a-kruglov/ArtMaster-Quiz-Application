@@ -7,6 +7,16 @@ plugins {
     id 'kotlinx-serialization'
 }
 
+def loadProperties() {
+    def props = new Properties()
+
+    file("keys.properties").withInputStream { props.load(it) }
+
+    return props
+}
+
+def keys = loadProperties()
+
 android {
     namespace 'com.example.lvappquiz'
     compileSdk 33
@@ -19,8 +29,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', 'OPEN_AI_KEY', "\"${OPEN_AI_KEY}\""
-        buildConfigField 'String', 'HARVARD_API_KEY', "\"${HARVARD_API_KEY}\""
+        buildConfigField 'String', 'OPEN_AI_KEY', keys.getProperty('OPEN_AI_KEY')
+        buildConfigField 'String', 'HARVARD_API_KEY', keys.getProperty('HARVARD_API_KEY')
     }
 
     buildTypes {
