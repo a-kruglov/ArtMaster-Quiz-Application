@@ -89,7 +89,7 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
         val fact = questionViewModel.question.value?.fact
         val textDialogFragment = TextDialogFragment()
         val args = Bundle()
-        args.putString("fact", fact)
+        args.putString("text", fact)
         textDialogFragment.arguments = args
         textDialogFragment.dialogCloseListener = this
         textDialogFragment.show(requireActivity().supportFragmentManager, "factDialog")
