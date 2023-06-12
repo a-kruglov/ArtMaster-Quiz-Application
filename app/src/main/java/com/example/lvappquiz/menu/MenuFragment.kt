@@ -40,16 +40,13 @@ class MenuFragment : Fragment() {
     private fun openQuiz() {
         findNavController().navigate(R.id.action_menuFragment_to_quizMenuFragment)
     }
-
     private fun openQuests() {
         questsViewModel.quest.value = QuestConfig().quest
         findNavController().navigate(R.id.action_menuFragment_to_questContainerFragment)
     }
-
     private fun openRandomQuestions() {
         findNavController().navigate(R.id.actionMenuFragmentToRandomQuestionsFragment)
     }
-
     private fun openButtonAiGuess() {
         findNavController().navigate(R.id.action_menuFragment_to_aiGuess)
     }
