@@ -1,4 +1,5 @@
 package com.example.lvappquiz.questions.fragments
+import ProgressSharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ import com.example.lvappquiz.lives.LivesViewModel
 import com.example.lvappquiz.questions.QuestionGenerator
 import com.example.lvappquiz.questions.QuestionType
 import com.example.lvappquiz.questions.QuestionViewModel
+import com.example.lvappquiz.user_progress.ProgressFragment
+import com.example.lvappquiz.user_progress.ProgressViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,8 +27,13 @@ import kotlinx.coroutines.withContext
 
 abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
 
+    private lateinit var progressSharedPreferences: ProgressSharedPreferences
+
     protected val questionViewModel: QuestionViewModel by activityViewModels()
     private val livesViewModel: LivesViewModel by activityViewModels()
+    private val progressViewModel: ProgressViewModel by activityViewModels()
+
+    private var needToShowRecordDialog = false
 
     private lateinit var questionGenerator: QuestionGenerator
 
@@ -36,12 +44,14 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
         savedInstanceState: Bundle?
     ): View? {
         questionGenerator = QuestionGenerator(questionType, requireContext())
+        progressSharedPreferences = ProgressSharedPreferences(requireContext())
         return inflater.inflate(R.layout.fragment_question, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLivesFragment()
+        setupProgressFragment()
         setupNextQuestion() // Начало игры: получение первого вопроса и отображение его фрагмента
 
         questionViewModel.onAnswerSelected.observe(viewLifecycleOwner) { onAnswerClick(it) }
@@ -54,6 +64,18 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
             .commit()
     }
 
+    private fun setupProgressFragment() {
+        val record = progressSharedPreferences.getProgress(questionType)
+        val progressFragment = ProgressFragment().apply {
+            arguments = Bundle().apply {
+                putInt("record", record)
+            }
+        }
+        childFragmentManager.beginTransaction()
+            .replace(R.id.questionProgressFragmentContainer, progressFragment)
+            .commit()
+    }
+
     private fun onAnswerClick(index: Int?) {
         if (index == null) {
             return
@@ -63,6 +85,7 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
             Toast.makeText(requireContext(), "Неправильно", Toast.LENGTH_SHORT).show()
 
         } else {
+            increaseProgress()
             Toast.makeText(requireContext(), "Правильно", Toast.LENGTH_SHORT).show()
             setupNextQuestion() // Обработка правильного ответа: получение следующего вопроса и отображение его фрагмента
         }
@@ -70,10 +93,25 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
 
     private fun processLiveDecreasing() {
         livesViewModel.lives.value = livesViewModel.lives.value?.minus(1) // Уменьшение ;bpyb
-        if (questionViewModel.question.value?.fact != null) {
-            openFactDialog() // ответ правильный, открываем диалоговое окно с фактом
+        val fact = questionViewModel.question.value?.fact
+        if (fact != null) {
+            openFactDialog(fact) // ответ правильный, открываем диалоговое окно с фактом
         } else {
             checkLivesAndProceed()
+        }
+    }
+
+    private fun increaseProgress() {
+        val newProgress = progressViewModel.progress.value?.plus(1)
+        progressViewModel.progress.value = newProgress
+        saveRecordProgress(newProgress ?: 0)
+    }
+
+    private fun saveRecordProgress(newProgress: Int) {
+        val currentRecord = progressSharedPreferences.getProgress(questionType)
+        if(newProgress > currentRecord) {
+            needToShowRecordDialog = true
+            progressSharedPreferences.saveProgress(questionType, newProgress)
         }
     }
 
@@ -85,13 +123,14 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
         }
     }
 
-    private fun openFactDialog() {
-        val fact = questionViewModel.question.value?.fact
+    private fun openFactDialog(text : String, withCallback : Boolean = true) {
         val textDialogFragment = TextDialogFragment()
         val args = Bundle()
-        args.putString("text", fact)
+        args.putString("text", text)
         textDialogFragment.arguments = args
-        textDialogFragment.dialogCloseListener = this
+        if(withCallback){
+            textDialogFragment.dialogCloseListener = this
+        }
         textDialogFragment.show(requireActivity().supportFragmentManager, "factDialog")
     }
 
@@ -121,6 +160,10 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
     protected abstract fun getQuestionFragment(): Fragment // Абстрактная функция для получения фрагмента с вопросом
 
     private fun finishTheGame() {
+        val record = progressSharedPreferences.getProgress(questionType)
+        if(needToShowRecordDialog) {
+            openFactDialog("You broke your record!\nNew record: $record", false)
+        }
         CoroutineScope(Dispatchers.Main).launch {
             findNavController().navigateUp() // Возвращение к предыдущему экрану
             resetModelView() // Сброс состояния ViewModel перед закрытием фрагмента
@@ -135,6 +178,7 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
     private fun resetModelView() {
         questionViewModel.reset() // Сброс состояния QuestionViewModel
         livesViewModel.reset() // Сброс состояния LivesViewModel
+        progressViewModel.reset()
+        needToShowRecordDialog = false
     }
 }
-
