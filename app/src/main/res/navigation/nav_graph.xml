@@ -7,7 +7,7 @@
     <fragment
             android:id="@+id/menuFragment"
             android:name="com.example.lvappquiz.menu.MenuFragment"
-            android:label="MenuFragment"
+            android:label=""
             tools:layout="@layout/fragment_menu">
         <action
                 android:id="@+id/actionMenuFragmentToRandomQuestionsFragment"
@@ -26,7 +26,7 @@
     <fragment
             android:id="@+id/quizMenuFragment"
             android:name="com.example.lvappquiz.quiz.QuizMenuFragment"
-            android:label="QuizMenuFragment"
+            android:label=""
             tools:layout="@layout/fragment_quiz_menu">
         <action
                 android:id="@+id/action_quizMenuFragment_to_containerFragment"
@@ -36,14 +36,14 @@
     <fragment
             android:id="@+id/aiGuessFragment"
             android:name="com.example.lvappquiz.ai_generation.AIGuessFragment"
-            android:label="AiGuessFragment"
+            android:label=""
             tools:layout="@layout/fragment_ai_guess">
     </fragment>
 
     <fragment
             android:id="@+id/containerFragment"
             android:name="com.example.lvappquiz.quiz.QuizQuestionContainerFragment"
-            android:label="ContainerFragment"
+            android:label=""
             tools:layout="@layout/fragment_quiz_question_container">
     </fragment>
 
@@ -95,7 +95,7 @@
     <fragment
             android:id="@+id/questContainerFragment"
             android:name="com.example.lvappquiz.quests.QuestContainerFragment"
-            android:label="QuestContainerFragment"
+            android:label=""
             tools:layout="@layout/fragment_quest_container">
         <action
                 android:id="@+id/action_questContainerFragment_to_factFragment"

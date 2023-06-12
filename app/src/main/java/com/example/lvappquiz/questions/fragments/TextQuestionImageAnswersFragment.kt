@@ -14,8 +14,6 @@ import com.example.lvappquiz.questions.QuestionViewModel
 class TextQuestionImageAnswersFragment : Fragment() { //Это фрагмент, отображающий вопрос с текстом и
 // изображениями вариантов ответов. Он использует данные из QuestionViewModel для заполнения полей вопроса
 // и обрабатывает выбор пользователя, устанавливая выбранный ответ в QuestionViewModel.
-
-
         private lateinit var questionText: TextView // Поле для отображения текста вопроса
         private lateinit var answerImages: Array<ImageView> // Массив полей для отображения изображений ответов
 
