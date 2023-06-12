@@ -22,7 +22,7 @@
                 android:layout_marginTop="20dp"
                 android:textAlignment="center"
                 tools:text="Fact will be here."
-                android:textColor="@color/ppp" />
+                android:textColor="@color/black" />
 
     </ScrollView>
 

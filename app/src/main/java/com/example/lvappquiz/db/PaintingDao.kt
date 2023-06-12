@@ -30,5 +30,4 @@ interface PaintingDao {
 
     @Query("SELECT history FROM paintings WHERE id = :paintingId")
     fun getPaintingHistoryById(paintingId: Int): String?
-
 }

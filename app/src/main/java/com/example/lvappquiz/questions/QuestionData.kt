@@ -2,7 +2,7 @@ package com.example.lvappquiz.questions
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-@Parcelize //данные о вопросе
+@Parcelize
 data class QuestionData(
     val type: QuestionType,
     val image: String?,

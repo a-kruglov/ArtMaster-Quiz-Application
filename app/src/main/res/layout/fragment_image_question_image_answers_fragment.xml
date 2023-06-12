@@ -83,6 +83,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:textAlignment="center"
             android:textSize="24sp"
+        android:textColor="@color/white"
             android:textStyle="bold"
             android:text="Какую из этих картин нарисовал ${authorName}?" />
 

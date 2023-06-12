@@ -5,7 +5,10 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "paintings", foreignKeys = [ForeignKey(entity = Author::class, parentColumns = ["id"], childColumns = ["authorId"])])
+@Entity(tableName = "paintings",
+    foreignKeys =
+    [ForeignKey(entity = Author::class, parentColumns =
+    ["id"], childColumns = ["authorId"])])
 data class Painting(
     @PrimaryKey val id: Int,
     val title: String,
