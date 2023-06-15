@@ -15,13 +15,9 @@ import com.example.lvappquiz.quests.QuestViewModel
 abstract class AbstractTaskFragment : Fragment(), DialogCloseListener {
 
     private lateinit var textViewError: TextView
-
     protected val viewModel: QuestViewModel by activityViewModels()
-
     private var currentTaskIndex : Int? = null
-
     abstract val fragmentId : Int
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,13 +25,11 @@ abstract class AbstractTaskFragment : Fragment(), DialogCloseListener {
     ): View? {
         return inflater.inflate(fragmentId, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textViewError = view.findViewById(R.id.textViewError)
         currentTaskIndex = arguments?.getInt("task_index")
     }
-
     protected fun showDialog(text : String) {
         val textDialogFragment = TextDialogFragment()
         val args = Bundle().apply {
@@ -45,7 +39,6 @@ abstract class AbstractTaskFragment : Fragment(), DialogCloseListener {
         textDialogFragment.dialogCloseListener = this
         textDialogFragment.show(childFragmentManager, "factDialog")
     }
-
     protected fun showAnswerError() {
         textViewError.isVisible = true
         textViewError.animate().alpha(1f).setDuration(300).withEndAction {
@@ -54,11 +47,9 @@ abstract class AbstractTaskFragment : Fragment(), DialogCloseListener {
             }
         }
     }
-
     override fun onDialogClose() {
         complete()
     }
-
     protected fun complete() {
         viewModel.completeTaskWithIndex(currentTaskIndex!!)
     }

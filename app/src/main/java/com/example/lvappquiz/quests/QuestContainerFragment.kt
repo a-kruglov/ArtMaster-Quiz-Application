@@ -18,7 +18,6 @@ class QuestContainerFragment : Fragment() {
     private val viewModel: QuestViewModel by activityViewModels()
     private var currentTask : TaskData? = null
     private var currentTaskObserver: Observer<Boolean>? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,12 +25,10 @@ class QuestContainerFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_quest_container, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         processNextTask();
     }
-
     private fun processNextTask() {
         val task = viewModel.getFirstNotCompletedTask()
         if (task == null) {
@@ -40,7 +37,6 @@ class QuestContainerFragment : Fragment() {
             setupFragmentWithTask(task)
         }
     }
-
     private fun startObservingTasksCompletion(task : TaskData) {
         currentTaskObserver = Observer { isCompleted ->
             if (isCompleted) {
@@ -49,14 +45,12 @@ class QuestContainerFragment : Fragment() {
         }
         currentTask?.isCompleted?.observe(viewLifecycleOwner, currentTaskObserver!!)
     }
-
     private fun onTaskCompleted(taskData: TaskData) {
         if(currentTask != taskData){
             return
         }
         processNextTask()
     }
-
     private fun setupFragmentWithTask(task: TaskData) {
         currentTask = task
         startObservingTasksCompletion(task)
@@ -71,7 +65,6 @@ class QuestContainerFragment : Fragment() {
         transaction.replace(R.id.quest_container, fragment)
         transaction.commit()
     }
-
     private fun finish() {
         CoroutineScope(Dispatchers.Main).launch {
             findNavController().navigateUp()

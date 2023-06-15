@@ -162,7 +162,7 @@ abstract class AbstractQuestionsFragment : Fragment(), DialogCloseListener {
     private fun finishTheGame() {
         val record = progressSharedPreferences.getProgress(questionType)
         if(needToShowRecordDialog) {
-            openFactDialog("You broke your record!\nNew record: $record", false)
+            openFactDialog("Ты побил свой рекорд!\nНовый рекорд: $record", false)
         }
         CoroutineScope(Dispatchers.Main).launch {
             findNavController().navigateUp() // Возвращение к предыдущему экрану

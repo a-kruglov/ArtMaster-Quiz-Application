@@ -5,9 +5,7 @@ import com.example.lvappquiz.questions.QuestionData
 import com.example.lvappquiz.questions.QuestionType
 
 class QuizViewModel : ViewModel() {
-
     val questionType = MutableLiveData<QuestionType?>()
-
     fun reset() {
         questionType.value = null
     }

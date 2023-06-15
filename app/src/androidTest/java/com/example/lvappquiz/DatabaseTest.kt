@@ -37,10 +37,15 @@ class AppDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun insertAndReadPainting() {
-        val author = Author(1, "Леонардо да Винчи", 1452, "Художник эпохи Возрождения")
+        val author = Author(1, "Леонардо да Винчи", 1452,
+            "Художник эпохи Возрождения")
+
         authorDao.insertAll(listOf(author))
 
-        val painting = Painting(1, "Мона Лиза", 1503, "Знаменитый портрет", "Возрождение", "изображение", 1)
+        val painting = Painting(1, "Мона Лиза", 1503,
+            "Знаменитый портрет", "Возрождение",
+            "изображение", 1)
+
         paintingDao.insertAll(listOf(painting))
 
         val loadedPainting = paintingDao.getPaintingById(1)

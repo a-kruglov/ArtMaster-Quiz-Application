@@ -80,10 +80,9 @@ class ImageQuestionTextAnswersFragment : Fragment() {
         for (i in answers.indices) {
             answers[i].text = viewModel.question.value?.answers?.get(i) // Установка текста для кнопок ответов
 
-            // Просто для отладки, позже удалить
-            if(i == viewModel.question.value?.correctAnswerIndex) {
-                answers[i].text = "${ answers[i].text} (✓)" // Добавление символа (✓) к правильному ответу для отладки
-            }
+//            if(i == viewModel.question.value?.correctAnswerIndex) {
+//                answers[i].text = "${ answers[i].text} (✓)" // Добавление символа (✓) к правильному ответу для отладки
+//            }
         }
     }
 

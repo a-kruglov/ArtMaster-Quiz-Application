@@ -9,14 +9,10 @@ import kotlinx.coroutines.flow.first
 class QuestionGenerator(private val questionType: QuestionType, private val context: Context) {
 
     private val database = AppDatabase.getInstance(context)
-
-    // SharedFlow для потока вопросов
     private val questionFlow: MutableSharedFlow<QuestionData> = MutableSharedFlow(replay = 1)
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
-    // Порог для пополнения очереди вопросов
     private val replenishThreshold = 5
 
-    // Map с операциями генерации вопросов для каждого типа вопроса
     private val operationMap: Map<QuestionType, () -> QuestionData> = mapOf(
         QuestionType.GuessBirthYearOfAuthor to ::generateGuessBirthYearOfAuthorQuestion,
         QuestionType.GuessAuthorByPicture to ::generateGuessAuthorByPictureQuestion,
@@ -24,13 +20,11 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
         QuestionType.GuessPictureByAuthor to ::generateGuessPictureByAuthorQuestion,
         QuestionType.Random to ::generateRandomQuestion
     )
-
     init {
         coroutineScope.launch {
             replenishQueue()
         }
     }
-
     suspend fun getQuestion(): QuestionData {
         if (questionFlow.replayCache.size < replenishThreshold) {
             coroutineScope.launch {
@@ -39,8 +33,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
         }
         return questionFlow.first()
     }
-
-    // пополнения очереди вопросов
     private suspend fun replenishQueue() {
         val replenishAmount = 10
 
@@ -49,26 +41,18 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
             questionFlow.emit(questionData)
         }
     }
-
-    //  генерация вопроса
     private fun generateQuestion(): QuestionData {
         return generateQuestionOfType(questionType)
     }
-
-    //генерация вопроса определенного типа
     private fun generateQuestionOfType(questionType: QuestionType): QuestionData {
         return operationMap[questionType]?.invoke()
             ?: throw IllegalStateException("Question type not found")
     }
-
-    // генерация случайного вопроса
     private fun generateRandomQuestion(): QuestionData {
         val concreteQuestionType =
             QuestionType.values().filter { it != QuestionType.Random }.random()
         return generateQuestionOfType(concreteQuestionType)
     }
-
-    // Метод для генерации вопроса "Угадай автора по картине"
     private fun generateGuessAuthorByPictureQuestion(): QuestionData {
         val painting = database.paintingDao().getRandomPaintings(1).first()
         val correctAuthorId = painting.authorId
@@ -77,16 +61,13 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
         val correctAuthor = database.authorDao().getAuthorById(correctAuthorId)
             ?: throw IllegalStateException("Author not found")
 
-        // Составление списка ответов
         val answers = incorrectAuthors.map { it.name }.toMutableList()
             .apply { add(correctAuthor.name); shuffle() }
-
 
         val correctAnswerIndex = answers.indexOf(correctAuthor.name)
 
         preLoadImages(painting.image)
 
-        // Возвращение данных вопроса
         return QuestionData(
             type = QuestionType.GuessAuthorByPicture,
             image = painting.image,
@@ -97,7 +78,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
         )
     }
 
-    // Метод для генерации вопроса "Угадай год по картине"
     private fun generateGuessYearByPictureQuestion(): QuestionData {
         val painting = database.paintingDao().getRandomPaintings(1).first()
         val correctYear = painting.year
@@ -110,7 +90,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
         val correctAnswerIndex = answers.indexOf(correctYear)
         preLoadImages(painting.image)
 
-        // Возвращение данных вопроса
         return QuestionData(
             type = QuestionType.GuessYearByPicture,
             image = painting.image,
@@ -120,8 +99,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
             painting.history
         )
     }
-
-    // Метод для генерации вопроса "Угадай картину по автору"
     private fun generateGuessPictureByAuthorQuestion(): QuestionData {
         val correctPainting = database.paintingDao().getRandomPaintings(1).first()
         val author = correctPainting.authorId
@@ -143,8 +120,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
             correctPainting.history
         )
     }
-
-    // Метод для генерации вопроса "Угадай год рождения автора"
     private fun generateGuessBirthYearOfAuthorQuestion(): QuestionData {
         val author = database.authorDao().getRandomAuthors(1).first()
         val correctYear = author.birthYear
@@ -164,8 +139,6 @@ class QuestionGenerator(private val questionType: QuestionType, private val cont
             author.authorFact
         )
     }
-
-    // Метод для предварительной загрузки изображений
     private fun preLoadImages(vararg urls: String) {
         urls.forEach { Glide.with(context).load(it).preload() }
     }

@@ -10,7 +10,6 @@ abstract class AbstractTextQuestionFragment : AbstractTaskFragment() {
 
     private lateinit var button: Button
     private lateinit var editText: EditText
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -18,7 +17,6 @@ abstract class AbstractTextQuestionFragment : AbstractTaskFragment() {
         editText = view.findViewById(R.id.editText)
         button.setOnClickListener { onButtonClick() }
     }
-
     protected abstract fun getCorrectAnswer() : String
 
     protected abstract fun getFact() : String
@@ -26,13 +24,11 @@ abstract class AbstractTextQuestionFragment : AbstractTaskFragment() {
     private fun getUserAnswer(): String {
         return editText.text.toString().trim().lowercase(Locale.getDefault())
     }
-
     private fun checkUserAnswer(): Boolean {
         val userAnswer = getUserAnswer()
         val correctAnswer = getCorrectAnswer()
         return userAnswer.equals(correctAnswer, ignoreCase = true)
     }
-
     private fun onButtonClick() {
         val answerCorrect = checkUserAnswer()
         if (answerCorrect) {

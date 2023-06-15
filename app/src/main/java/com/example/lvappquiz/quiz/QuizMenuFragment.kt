@@ -12,10 +12,8 @@ import com.example.lvappquiz.lives.LivesViewModel
 import com.example.lvappquiz.questions.QuestionType
 
 class QuizMenuFragment : Fragment() {
-
     private val livesViewModel: LivesViewModel by activityViewModels()
     private val quizViewModel: QuizViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,7 +21,6 @@ class QuizMenuFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_quiz_menu, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,7 +34,6 @@ class QuizMenuFragment : Fragment() {
         buttonGuessYearByPicture.setOnClickListener { translateToQuestionContainer(QuestionType.GuessYearByPicture) }
         buttonGuessBirthYearOfAuthor.setOnClickListener { translateToQuestionContainer(QuestionType.GuessBirthYearOfAuthor) }
     }
-
     private fun translateToQuestionContainer(questionType: QuestionType) {
         livesViewModel.reset();
         quizViewModel.questionType.value = questionType

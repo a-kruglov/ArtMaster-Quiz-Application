@@ -9,13 +9,17 @@
             android:id="@+id/button_guess_picture_by_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+            android:layout_marginTop="120dp"
             android:text="Угадай картину по автору" />
 
     <Button
             android:id="@+id/button_guess_author_by_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:text="Угадай автора по картине" />
 
@@ -24,17 +28,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
             android:text="Угадай год создания картины" />
 
     <Button
             android:id="@+id/button_guess_author_by_fact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:text="Угадай день рождения художника" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/woman" />
 
     <FrameLayout
             android:id="@+id/fullscreen_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+    </FrameLayout>
 </LinearLayout>

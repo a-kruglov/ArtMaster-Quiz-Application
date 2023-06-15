@@ -1,6 +1,6 @@
 package com.example.lvappquiz.questions
 
-enum class QuestionType { //просто перечисление типов вопросов, которые могут быть заданы
+enum class QuestionType {
     GuessPictureByAuthor,
     GuessAuthorByPicture,
     GuessYearByPicture,

@@ -5,10 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.example.lvappquiz.questions.QuestionData
 
 class QuestionViewModel : ViewModel() {
-    val question = MutableLiveData<QuestionData?>() //хранение текущего вопроса
-    val onAnswerSelected: MutableLiveData<Int?> = MutableLiveData() //хранение индекса правильного ответа
-
-    fun reset() { //подготавливает вьюмодель для нового вопроса
+    val question = MutableLiveData<QuestionData?>()
+    val onAnswerSelected: MutableLiveData<Int?> = MutableLiveData()
+    fun reset() {
         question.value = null
         onAnswerSelected.value = null
     }

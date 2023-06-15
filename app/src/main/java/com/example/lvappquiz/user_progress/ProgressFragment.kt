@@ -12,7 +12,6 @@ class ProgressFragment : Fragment() {
 
     private lateinit var progressText: TextView
     private lateinit var recordText: TextView
-
     private val viewModel: ProgressViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -21,7 +20,6 @@ class ProgressFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_progress, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -29,13 +27,13 @@ class ProgressFragment : Fragment() {
         recordText = view.findViewById(R.id.record_text)
 
         val record = arguments?.getInt("record", 0)
-        recordText.text = "Record: $record"
+        recordText.text = "Рекорд: $record"
 
         viewModel.progress.observe(viewLifecycleOwner) { onProgressChanged(it) }
     }
 
     private fun onProgressChanged(newProgress: Int) {
-        progressText.text = "Progress: $newProgress"
+        progressText.text = "Прогресс: $newProgress"
     }
 }
 

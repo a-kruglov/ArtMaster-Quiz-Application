@@ -15,7 +15,6 @@ import com.example.lvappquiz.questions.fragments.specific.GuessYearByPictureQues
 class QuizQuestionContainerFragment : Fragment() {
 
     private val viewModel: QuizViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,12 +22,10 @@ class QuizQuestionContainerFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_quiz_question_container, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setQuestionView() //выставляем тип вопроса
+        setQuestionView() 
     }
-
     private fun setQuestionView() {
         val questionType = viewModel.questionType.value
         if (questionType != null) {
@@ -41,7 +38,6 @@ class QuizQuestionContainerFragment : Fragment() {
             }
         }
     }
-
     private fun setFragment(fragment: Fragment) {
         val transaction = childFragmentManager.beginTransaction()
         transaction.replace(R.id.quiz_question_container, fragment)
